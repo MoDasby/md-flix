@@ -38,7 +38,7 @@ const Sidebar = () => {
     <Stack
       as="aside"
       h="100vh"
-      w="20vw"
+      w={{base: "15vw", md: "20vw", lg: "15vw"}}
       bg={useColorModeValue("gray.100", "blackAlpha.200")}
       spacing="2rem"
     >
@@ -51,7 +51,7 @@ const Sidebar = () => {
       >
         <Heading
           as="h1"
-          fontSize={{ base: "1rem", md: "2.5rem" }}
+          fontSize={{ base: ".8rem", md: "2rem" }}
           fontFamily="Rubik"
         >
           Md-Flix
@@ -122,6 +122,7 @@ const SidebarItem = ({ icon, text, active, onClick }: SidebarItemProps) => {
       <Text
         {...(active ? {} : { color: "gray.600" })}
         display={{ base: "none", md: "block" }}
+        letterSpacing=".2rem"
       >
         {text}
       </Text>
