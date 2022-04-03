@@ -41,6 +41,7 @@ const Sidebar = () => {
       w={{base: "15vw", md: "20vw", lg: "15vw"}}
       bg={useColorModeValue("gray.100", "blackAlpha.200")}
       spacing="2rem"
+      boxShadow="0 5px 15px #0000007f"
     >
       <Flex
         as="header"
