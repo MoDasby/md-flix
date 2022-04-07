@@ -35,71 +35,76 @@ const Sidebar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Stack
-      as="aside"
-      h="100vh"
-      w={{base: "15vw", md: "20vw", lg: "15vw"}}
-      bg={useColorModeValue("gray.100", "blackAlpha.200")}
-      spacing="2rem"
-      boxShadow="0 5px 15px #0000007f"
-    >
-      <Flex
-        as="header"
-        w="100%"
-        justify="space-between"
-        align="center"
-        p="2"
+
+    <>
+      <Button
+        bg="transparent"
+        onClick={toggleColorMode}
+        transition="0.3s"
+        position="absolute"
+        right="0"
+        _focus={{ outline: "none" }}
+        _hover={{ bg: "none" }}
       >
-        <Heading
-          as="h1"
-          fontSize={{ base: ".8rem", md: "2rem" }}
-          fontFamily="Rubik"
-        >
-          Md-Flix
-        </Heading>
+        <Icon
+          as={colorMode === "light" ? FiSun : FiMoon}
+          fontSize={{ md: "1.5rem" }}
+        />
+      </Button>
 
-        <Button
-          bg="transparent"
-          onClick={toggleColorMode}
-          transition="0.3s"
-          position={{ base: "absolute", md: "relative" }}
-          right="0"
-          _focus={{ outline: "none" }}
-          _hover={{ bg: "none" }}
-        >
-          <Icon
-            as={colorMode === "light" ? FiSun : FiMoon}
-          />
-        </Button>
-      </Flex>
+      <Stack
+        as="aside"
+        h="100vh"
+        w={{ base: "15vw", md: "20vw", lg: "15vw" }}
+        bg={useColorModeValue("gray.100", "blackAlpha.200")}
+        spacing="2rem"
+        boxShadow="0 5px 15px #0000007f"
+        pos="fixed"
+        top="0"
+        zIndex="1"
+      >
 
-      <Box>
-        <SidebarItem
-          icon={FiHome}
-          text="Home"
-          active={activeKey === SidebarItems.Home}
-          onClick={() => {
-            setActiveKey(SidebarItems.Home)
-          }}
-        />
-        <SidebarItem
-          icon={FiTrendingUp}
-          text="Em Alta"
-          active={activeKey === SidebarItems.Trending}
-          onClick={() => {
-            setActiveKey(SidebarItems.Trending)
-          }}
-        />
-        <SidebarItem
-          icon={FiCompass}
-          text="Explorar"
-          active={activeKey === SidebarItems.Explore}
-          onClick={() => {
-            setActiveKey(SidebarItems.Explore)
-          }}
-        />
-      </Box>
-    </Stack>
+        <Flex
+          as="header"
+          w="100%"
+          justify="space-between"
+          align="center"
+          p="2"
+        >
+          <Heading
+            as="h1"
+            fontSize={{ base: ".8rem", md: "2rem" }}
+            fontFamily="Rubik"
+          >
+            Md-Flix
+          </Heading>
+        </Flex>
+
+        <Box>
+          <SidebarItem
+            icon={FiHome}
+            text="Home"
+            active={activeKey === SidebarItems.Home}
+            onClick={() => {
+              setActiveKey(SidebarItems.Home);
+            }} />
+          <SidebarItem
+            icon={FiTrendingUp}
+            text="Em Alta"
+            active={activeKey === SidebarItems.Trending}
+            onClick={() => {
+              setActiveKey(SidebarItems.Trending);
+            }} />
+          <SidebarItem
+            icon={FiCompass}
+            text="Explorar"
+            active={activeKey === SidebarItems.Explore}
+            onClick={() => {
+              setActiveKey(SidebarItems.Explore);
+            }} />
+        </Box>
+      </Stack>
+    </>
   )
 }
 
