@@ -16,7 +16,8 @@ import {
   FiTrendingUp,
   FiCompass,
   FiSun,
-  FiMoon
+  FiMoon,
+  FiSearch
 } from 'react-icons/fi';
 import { useState } from 'react';
 import SidebarItemProps from '../../interfaces/SidebarItemProps';
@@ -25,6 +26,7 @@ enum SidebarItems {
   Home = "home",
   Trending = "trending",
   Explore = "explore",
+  Search = "search",
 
 }
 
@@ -87,21 +89,35 @@ const Sidebar = () => {
             active={activeKey === SidebarItems.Home}
             onClick={() => {
               setActiveKey(SidebarItems.Home);
-            }} />
+            }}
+          />
+
+          <SidebarItem
+            icon={FiSearch}
+            text="Buscar"
+            active={activeKey === SidebarItems.Search}
+            onClick={() => {
+              setActiveKey(SidebarItems.Search);
+            }}
+          />
+
           <SidebarItem
             icon={FiTrendingUp}
             text="Em Alta"
             active={activeKey === SidebarItems.Trending}
             onClick={() => {
               setActiveKey(SidebarItems.Trending);
-            }} />
+            }}
+          />
+
           <SidebarItem
             icon={FiCompass}
             text="Explorar"
             active={activeKey === SidebarItems.Explore}
             onClick={() => {
               setActiveKey(SidebarItems.Explore);
-            }} />
+            }}
+          />
         </Box>
       </Stack>
     </>
