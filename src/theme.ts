@@ -10,6 +10,14 @@ const Button: ComponentStyleConfig = {
                 bg: 'purple.500',
             }
         },
+        solid: {
+            bg: 'purple.500',
+            color: 'white',
+            transition: '.5s',
+            _hover: {
+                bg: 'purple.600',
+            }
+        }
     }
 }
 
