@@ -22,7 +22,7 @@ import {
 import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
 
-const Slider = ({ sliderName, movies }: SliderProps) => {
+const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMovie, setSelectedMovie] = useState<
@@ -54,26 +54,33 @@ const Slider = ({ sliderName, movies }: SliderProps) => {
             {sliderName}
           </Text>
 
-          <Button
-            variant='outline'
-            size="sm"
-          >
-            Ver todos
-          </Button>
+          {
+            uriToRedirect && (
+              <Button
+                as="a"
+                href={uriToRedirect}
+                variant='outline'
+                size="sm"
+              >
+                Ver todos
+              </Button>
+            )
+          }
         </Flex>
 
         <Grid
-          templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" }}
+          templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
           gap="6"
           p="5"
         >
-          {movies.map((movie, index) => (
+          {data.map((movie, index) => (
             <Box
               key={index}
               as='a'
               cursor="pointer"
               position="relative"
               transition="all .3s ease-in-out"
+              w={{ base: '150px' }}
               onClick={() => {
                 setSelectedMovie(
                   {
@@ -89,7 +96,7 @@ const Slider = ({ sliderName, movies }: SliderProps) => {
               }}
             >
               <Image
-                src={movie.poster_path}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
                 objectFit="cover"
                 borderRadius="20px" />
@@ -127,26 +134,24 @@ const Slider = ({ sliderName, movies }: SliderProps) => {
                     overflow="hidden"
                     w="100%"
                   >
-                    {movie.genre}
+                    {movie.genres[0]}
                   </Text>
 
                   <HStack>
                     <FiBarChart2
-                      size="1.5rem" />
+                      size="25px" />
 
                     <Text
                       textOverflow="ellipsis"
                       overflow="hidden"
                       w="100%"
                     >
-                      {movie.rating}
+                      {movie.vote_average}
                     </Text>
                   </HStack>
                 </Flex>
               </Flex>
             </Box>
-
-
           ))}
         </Grid>
       </Box>
@@ -180,7 +185,7 @@ const Slider = ({ sliderName, movies }: SliderProps) => {
               </Text>
 
               <Image
-                src={selectedMovie?.poster_path}
+                src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
                 alt={selectedMovie?.title}
                 objectFit="cover"
                 borderRadius="20px"
