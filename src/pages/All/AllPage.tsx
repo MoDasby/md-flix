@@ -15,7 +15,7 @@ const AllPage = () => {
   useEffect(() => {
     const getData = async (type: string) => {
       if (type === "movie") {
-        const movies = await Api.getTvShows("/discover/tv", 1, true);
+        const movies = await Api.getMovies("/discover/movie", 1, true);
         setData(movies);
       } else {
         const tvShows = await Api.getTvShows("/discover/tv", 1, true);
