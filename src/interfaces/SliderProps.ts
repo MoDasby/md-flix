@@ -1,19 +1,10 @@
-interface MovieData {
-    title: string,
-    backdrop_path: string,
-    poster_path: string,
-    rating: number,
-    genre: string,
-    overview: string,
-}
-
-interface TvData extends MovieData {
-    seasons: number,
-}
+import MovieData from "./MovieData";
+import TvData from "./TvData";
 
 interface SliderProps {
     sliderName: string,
-    movies: MovieData[] | TvData[],
+    data: MovieData[] | TvData[],
+    uriToRedirect?: string,
 }
 
 export default SliderProps;

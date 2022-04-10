@@ -4,6 +4,7 @@ interface SidebarItemProps {
     icon: IconType
     text: string
     active?: boolean
+    redirect: string
     onClick?: () => void
 }
 
