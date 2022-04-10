@@ -20,6 +20,7 @@ import {
   FiSearch
 } from 'react-icons/fi';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SidebarItemProps from '../../interfaces/SidebarItemProps';
 
 enum SidebarItems {
@@ -50,6 +51,7 @@ const Sidebar = () => {
       >
         <Icon
           as={colorMode === "light" ? FiSun : FiMoon}
+          color={useColorModeValue("blackAlpha.800", "white")}
           fontSize={{ md: "1.5rem" }}
         />
       </Button>
@@ -84,6 +86,7 @@ const Sidebar = () => {
 
         <Box>
           <SidebarItem
+            redirect='/'
             icon={FiHome}
             text="Home"
             active={activeKey === SidebarItems.Home}
@@ -93,6 +96,7 @@ const Sidebar = () => {
           />
 
           <SidebarItem
+            redirect='/search'
             icon={FiSearch}
             text="Buscar"
             active={activeKey === SidebarItems.Search}
@@ -102,6 +106,7 @@ const Sidebar = () => {
           />
 
           <SidebarItem
+            redirect='/trending'
             icon={FiTrendingUp}
             text="Em Alta"
             active={activeKey === SidebarItems.Trending}
@@ -111,6 +116,7 @@ const Sidebar = () => {
           />
 
           <SidebarItem
+            redirect='/explore'
             icon={FiCompass}
             text="Explorar"
             active={activeKey === SidebarItems.Explore}
@@ -124,44 +130,48 @@ const Sidebar = () => {
   )
 }
 
-const SidebarItem = ({ icon, text, active, onClick }: SidebarItemProps) => {
+const SidebarItem = ({ icon, text, active, redirect, onClick }: SidebarItemProps) => {
   return (
-    <Flex
-      w="100%"
-      p="2"
-      align="center"
-      fontFamily="Roboto"
-      cursor="pointer"
-      transition="0.3s"
-      onClick={onClick}
+    <Link
+      to={redirect}
     >
-      <Icon
-        as={icon}
-        marginRight="1rem"
-        marginLeft="1rem"
-        {...(active ? { color: "purple.500" } : { color: "gray.600" })}
-      />
-      <Text
-        {...(active ? {} : { color: "gray.600" })}
-        display={{ base: "none", md: "block" }}
-        letterSpacing=".2rem"
+      <Flex
+        w="100%"
+        p="2"
+        align="center"
+        fontFamily="Roboto"
+        cursor="pointer"
+        transition="0.3s"
+        onClick={onClick}
       >
-        {text}
-      </Text>
-
-      {
-        active &&
-        <Box
-          h="20px"
-          w="5px"
-          borderRightRadius="5px"
-          bg="purple.700"
-          pos="absolute"
-          left="0"
+        <Icon
+          as={icon}
+          marginRight="1rem"
+          marginLeft="1rem"
+          {...(active ? { color: "purple.500" } : { color: "gray.600" })}
+        />
+        <Text
+          {...(active ? {} : { color: "gray.600" })}
+          display={{ base: "none", md: "block" }}
+          letterSpacing=".2rem"
         >
-        </Box>
-      }
-    </Flex>
+          {text}
+        </Text>
+
+        {
+          active &&
+          <Box
+            h="20px"
+            w="5px"
+            borderRightRadius="5px"
+            bg="purple.700"
+            pos="absolute"
+            left="0"
+          >
+          </Box>
+        }
+      </Flex>
+    </Link>
   )
 }
 
