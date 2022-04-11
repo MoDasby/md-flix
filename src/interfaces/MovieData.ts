@@ -6,6 +6,7 @@ interface MovieData {
     vote_average: number,
     genres: string[],
     overview: string,
+    type?: string
 }
 
 export default MovieData;
