@@ -26,7 +26,7 @@ export default class Api {
                 poster_path: movie.poster_path,
                 genres: movie.genre_ids.map((id: number) => Api.getGenre(id)),
                 vote_average: movie.vote_average,
-                type: movie.media_type
+                type: "movie"
             }
         });
 
@@ -51,7 +51,7 @@ export default class Api {
             vote_average:request.data.vote_average,
             genres: request.data.genres.map((genre: any) => Api.getGenre(genre.id)),
             overview: request.data.overview,
-            type: request.data.media_type
+            type: "movie"
         }
 
         return response;
@@ -71,7 +71,7 @@ export default class Api {
                 vote_average: movie.vote_average,
                 release_date: movie.release_date,
                 number_of_seasons: movie.number_of_seasons,
-                type: movie.media_type
+                type: "tv"
             }
         });
 

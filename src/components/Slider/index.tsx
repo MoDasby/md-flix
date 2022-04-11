@@ -91,7 +91,7 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
                     title: movie.title,
                     overview: movie.overview,
                     poster_path: movie.poster_path,
-                    type: movie.type ? movie.type : 'tv'
+                    type: movie.type === 'movie' ? 'movie' : 'tv',
                   }
                 );
                 onOpen();
@@ -144,8 +144,8 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
 
                   <HStack>
                     <FiBarChart2
-                      size="25px" />
-
+                      size="25px"
+                    />
                     <Text
                       textOverflow="ellipsis"
                       overflow="hidden"
