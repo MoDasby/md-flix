@@ -26,7 +26,7 @@ export default class Api {
                 poster_path: movie.poster_path,
                 genres: movie.genre_ids.map((id: number) => Api.getGenre(id)),
                 vote_average: movie.vote_average,
-                release_date: movie.release_date
+                type: movie.media_type
             }
         });
 
@@ -39,10 +39,22 @@ export default class Api {
         }
     }
 
-    public static async getMovie(id: number): Promise<MovieData> {
+    public static async getMovie(id: string | undefined): Promise<MovieData> {
         const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=pt-BR`;
-        const response = await axios.get(url);
-        return response.data.results;
+        const request = await axios.get(url);
+        console.log(request.data);
+        const response: MovieData = {
+            id: request.data.id,
+            title: request.data.title,
+            backdrop_path: request.data.backdrop_path,
+            poster_path: request.data.poster_path,
+            vote_average:request.data.vote_average,
+            genres: request.data.genres.map((genre: any) => Api.getGenre(genre.id)),
+            overview: request.data.overview,
+            type: request.data.media_type
+        }
+
+        return response;
     }
 
     public static async getTvShows(uri: string, page: number, allMovies?: boolean): Promise<TvData[]> {
@@ -58,7 +70,8 @@ export default class Api {
                 genres: movie.genre_ids.map((id: number) => Api.getGenre(id)),
                 vote_average: movie.vote_average,
                 release_date: movie.release_date,
-                number_of_seasons: movie.number_of_seasons
+                number_of_seasons: movie.number_of_seasons,
+                type: movie.media_type
             }
         });
 
