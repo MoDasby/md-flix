@@ -21,15 +21,18 @@ import {
 } from 'react-icons/fi'
 import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMovie, setSelectedMovie] = useState<
     {
+      id: number
       title: string,
       overview: string,
       poster_path: string,
+      type: string,
     }
   >();
 
@@ -84,9 +87,11 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
               onClick={() => {
                 setSelectedMovie(
                   {
+                    id: movie.id,
                     title: movie.title,
                     overview: movie.overview,
-                    poster_path: movie.poster_path
+                    poster_path: movie.poster_path,
+                    type: movie.type ? movie.type : 'tv'
                   }
                 );
                 onOpen();
@@ -207,11 +212,15 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              variant="solid"
+            <Link
+              to={`/${selectedMovie?.type}/${selectedMovie?.id}`}
             >
-              Ver Mais
-            </Button>
+              <Button
+                variant="solid"
+              >
+                Ver Mais
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>
