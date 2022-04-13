@@ -1,9 +1,8 @@
-import MovieData from "./MovieData";
-import TvData from "./TvData";
+import { MovieOrTvData } from "./MovieOrTvData";
 
 interface SliderProps {
     sliderName: string,
-    data: MovieData[] | TvData[],
+    data: MovieOrTvData[],
     uriToRedirect?: string,
 }
 
