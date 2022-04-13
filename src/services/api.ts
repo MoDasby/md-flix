@@ -1,7 +1,6 @@
 import axios from "axios";
-import MovieData from "../interfaces/MovieData";
-import TvData from "../interfaces/TvData";
 import genres from "../utils/genres";
+import { MovieOrTvData } from "../interfaces/MovieOrTvData";
 
 const API_KEY = "bc05d5c6bd8279db7d5253fffbb3b1f3"
 const BASE_URL = "https://api.themoviedb.org/3"
@@ -14,11 +13,11 @@ export default class Api {
         return genre ? genre.name : "";
     }
 
-    public static async getMovies(uri: string, page: number, allMovies?: boolean): Promise<MovieData[]> {
-        const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}`;
+    public static async getMovies(uri: string, page: number, allMovies?: boolean): Promise<MovieOrTvData[]> {
+        const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}&sort_by=popularity.desc`;
         const request = await axios.get(url);
 
-        const response: MovieData[] = request.data.results.map((movie: any) => {
+        const response: MovieOrTvData[] = request.data.results.map((movie: any) => {
             return {
                 id: movie.id,
                 title: movie.title,
@@ -33,17 +32,17 @@ export default class Api {
         if (allMovies) {
             return response;
         } else {
-            return response.filter((movie: MovieData, index: number) => {
+            return response.filter((movie: MovieOrTvData, index: number) => {
                 return index <= 11;
             });
         }
     }
 
-    public static async getMovie(id: string | undefined): Promise<MovieData> {
-        const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=pt-BR`;
+    public static async getMovie(id: string | undefined): Promise<MovieOrTvData> {
+        const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=pt-BR&sort_by=popularity.desc`;
         const request = await axios.get(url);
         console.log(request.data);
-        const response: MovieData = {
+        const response: MovieOrTvData = {
             id: request.data.id,
             title: request.data.title,
             backdrop_path: request.data.backdrop_path,
@@ -57,11 +56,11 @@ export default class Api {
         return response;
     }
 
-    public static async getTvShows(uri: string, page: number, allMovies?: boolean): Promise<TvData[]> {
-        const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}`;
+    public static async getTvShows(uri: string, page: number, allMovies?: boolean): Promise<MovieOrTvData[]> {
+        const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}&sort_by=popularity.desc`;
         const request = await axios.get(url);
 
-        const response: TvData[] = request.data.results.map((movie: any) => {
+        const response: MovieOrTvData[] = request.data.results.map((movie: any) => {
             return {
                 id: movie.id,
                 title: movie.name,
@@ -78,9 +77,27 @@ export default class Api {
         if (allMovies) {
             return response;
         } else {
-            return response.filter((movie: TvData, index: number) => {
+            return response.filter((movie: MovieOrTvData, index: number) => {
                 return index <= 11;
             });
         }
+    }
+
+    public static async getTvShow(id: string | undefined): Promise<MovieOrTvData> {
+        const url = `${BASE_URL}/tv/${id}?api_key=${API_KEY}&language=pt-BR&sort_by=popularity.desc`;
+        const request = await axios.get(url);
+        const response: MovieOrTvData = {
+            id: request.data.id,
+            title: request.data.name,
+            backdrop_path: request.data.backdrop_path,
+            poster_path: request.data.poster_path,
+            vote_average:request.data.vote_average,
+            genres: request.data.genres.map((genre: any) => Api.getGenre(genre.id)),
+            overview: request.data.overview,
+            number_of_seasons: request.data.number_of_seasons,
+            type: "tv"
+        }
+
+        return response;
     }
 }
