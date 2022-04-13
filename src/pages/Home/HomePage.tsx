@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import Slider from "../../components/Slider";
 import SliderSkeleton from "../../components/SliderSkeleton";
-import MovieData from "../../interfaces/MovieData";
-import TvData from "../../interfaces/TvData";
+import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
 interface IHomePage {
-  moviesTrending: MovieData[],
-  topRatedMovies: MovieData[],
-  popularMovies: MovieData[],
-  TvTrending: TvData[],
-  topRatedTv: TvData[],
-  popularTv: TvData[],
+  moviesTrending: MovieOrTvData[],
+  topRatedMovies: MovieOrTvData[],
+  popularMovies: MovieOrTvData[],
+  TvTrending: MovieOrTvData[],
+  topRatedTv: MovieOrTvData[],
+  popularTv: MovieOrTvData[],
 }
 
 const HomePage = () => {

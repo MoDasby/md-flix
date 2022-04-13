@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SliderSkeleton from "../../components/SliderSkeleton";
-import MovieData from "../../interfaces/MovieData";
-import TvData from "../../interfaces/TvData";
+import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 import Slider from "../../components/Slider";
 import Sidebar from "../../components/Sidebar";
 
 const AllPage = () => {
   const { type = "movie" } = useParams();
-  const [data, setData] = useState<MovieData[] | TvData[]>([]);
+  const [data, setData] = useState<MovieOrTvData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
