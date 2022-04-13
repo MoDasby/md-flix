@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllPage from "./pages/All/AllPage";
 import HomePage from "./pages/Home/HomePage";
-import MoviePage from "./pages/MoviePage";
+import DetailsPage from "./pages/Details";
 
 const Router = () => {
     return (
@@ -9,7 +9,7 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/all/:type" element={<AllPage />} />
-                <Route path="/:type/:id" element={<MoviePage />} />
+                <Route path="/details/:type/:id" element={<DetailsPage />} />
             </Routes>
         </BrowserRouter>
     )

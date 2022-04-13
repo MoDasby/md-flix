@@ -2,54 +2,30 @@ import {
   Image,
   SimpleGrid,
   VStack,
+  HStack,
   Text,
-  HStack
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 import {
   FiBarChart2
 } from 'react-icons/fi';
-import { useParams } from 'react-router-dom';
-import MovieData from '../../interfaces/MovieData';
-import TvData from '../../interfaces/TvData';
-import Api from '../../services/api';
+import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
 
-const Details = ({ id, type }: { id: string | undefined, type: string | undefined }) => {
-  const [data, setData] = useState<MovieData | TvData>({
-    id: 0,
-    title: '',
-    overview: '',
-    poster_path: '',
-    backdrop_path: '',
-    genres: [],
-    vote_average: 0,
-  });
-
-  useEffect(() => {
-    async function getData() {
-      if (type === "movie") {
-        const response = await Api.getMovie(id);
-        console.log(response)
-        setData(response);
-      }
-    }
-
-    getData();
-  }, [data])
+const Details = ({ data }: { data: MovieOrTvData }) => {
 
   return (
     <SimpleGrid
-      columns={{ base: 1, md: 2 }}
+      columns={{ base: 1, lg: 2 }}
       spacing={8}
       marginLeft={{ base: "15vw", md: "20vw", lg: "15vw" }}
       p={1}
+      placeItems={{ base: "center", lg: "start" }}
     >
       <Image
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
         alt={data.title}
         objectFit="cover"
         objectPosition="center"
-        h="100vh"
+        h={{ base: "50vh", lg: "100vh" }}
         p={8}
       />
 
@@ -64,16 +40,36 @@ const Details = ({ id, type }: { id: string | undefined, type: string | undefine
           {data.title}
         </Text>
         <HStack spacing={8}>
+          {
+            data.type === "tv" &&
+            <Text
+              fontSize="1rem"
+            >
+              {`${data.number_of_seasons} Temporadas`}
+            </Text>
+          }
           <HStack>
             <FiBarChart2
               size="20px"
             />
-            <Text fontSize="md" fontWeight="bold">{data.vote_average}</Text>
+            <Text
+              fontSize="md"
+            >
+              {data.vote_average}
+            </Text>
           </HStack>
-          <Text fontSize="md" fontWeight="bold">{data.genres.join(', ')}</Text>
+          <Text
+            fontSize="md"
+          >
+            {data.genres.join(', ')}
+          </Text>
         </HStack>
-        <Text fontSize="md" fontWeight="bold">{data.overview}</Text>
-
+        <Text
+          fontSize="md"
+          fontWeight="bold"
+        >
+          {data.overview}
+        </Text>
       </VStack>
     </SimpleGrid >
   )

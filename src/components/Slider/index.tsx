@@ -213,7 +213,7 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
 
           <ModalFooter>
             <Link
-              to={`/${selectedMovie?.type}/${selectedMovie?.id}`}
+              to={`/details/${selectedMovie?.type}/${selectedMovie?.id}`}
             >
               <Button
                 variant="solid"
