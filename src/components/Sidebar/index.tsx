@@ -22,19 +22,12 @@ import {
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SidebarItemProps from '../../interfaces/SidebarItemProps';
-
-enum SidebarItems {
-  Home = "home",
-  Trending = "trending",
-  Explore = "explore",
-  Search = "search",
-
-}
+import SidebarItems from '../../enums/SidebarItems';
 
 
-const Sidebar = () => {
+const Sidebar = ({ active }: { active: SidebarItems }) => {
 
-  const [activeKey, setActiveKey] = useState<SidebarItems>(SidebarItems.Home);
+  const [activeKey, setActiveKey] = useState<SidebarItems>(active);
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (

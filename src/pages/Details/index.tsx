@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Details from "../../components/Details";
 import DetailsSkeleton from "../../components/DetailsSkeleton";
 import Sidebar from "../../components/Sidebar";
+import SidebarItems from "../../enums/SidebarItems";
 import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
@@ -40,7 +41,7 @@ const DetailsPage = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar active={SidebarItems.None}  />
       {
         isLoading ? <DetailsSkeleton /> : <Details data={data} />
       }

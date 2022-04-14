@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import Slider from "../../components/Slider";
 import SliderSkeleton from "../../components/SliderSkeleton";
+import SidebarItems from "../../enums/SidebarItems";
 import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
@@ -27,7 +28,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar active={SidebarItems.Search} />
       <Box
         w="80vw"
         display="flex"

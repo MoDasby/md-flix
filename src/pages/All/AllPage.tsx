@@ -5,6 +5,7 @@ import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 import Slider from "../../components/Slider";
 import Sidebar from "../../components/Sidebar";
+import SidebarItems from "../../enums/SidebarItems";
 
 const AllPage = () => {
   const { type = "movie" } = useParams();
@@ -28,7 +29,7 @@ const AllPage = () => {
 
   return (
     <>
-    <Sidebar />
+    <Sidebar active={SidebarItems.None} />
       {loading ? (
         <SliderSkeleton />
       ) : (

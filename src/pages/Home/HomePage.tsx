@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import Slider from "../../components/Slider";
 import SliderSkeleton from "../../components/SliderSkeleton";
+import SidebarItems from "../../enums/SidebarItems";
 import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
@@ -57,7 +58,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar active={SidebarItems.Home} />
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
