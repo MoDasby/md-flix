@@ -30,11 +30,11 @@ const SearchPage = () => {
     <>
       <Sidebar active={SidebarItems.Search} />
       <Box
-        w="80vw"
+        w="90vw"
         display="flex"
         alignItems="center"
-        paddingLeft={{ base: "15vw", md: "20vw" }}
-        p={10}
+        paddingTop="4rem"
+        paddingLeft={{ base: "20vw", md: "25vw", lg: "20vw" }}
       >
         <Input
           placeholder="Pesquisar..."
