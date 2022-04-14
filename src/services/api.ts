@@ -42,7 +42,6 @@ export default class Api {
     public static async getMovie(id: string | undefined): Promise<MovieOrTvData> {
         const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=pt-BR&sort_by=popularity.desc`;
         const request = await axios.get(url);
-        console.log(request.data);
         const response: MovieOrTvData = {
             id: request.data.id,
             title: request.data.title,
@@ -100,5 +99,24 @@ export default class Api {
         }
 
         return response;
+    }
+
+    public static async getSearch(query: string, page: number): Promise<MovieOrTvData[]> {
+        const url = `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${query}&page=${page}`;
+        const request = await axios.get(url);
+
+        const response: MovieOrTvData[] = request.data.results.map((movie: any) => {
+            return {
+                id: movie.id,
+                title: movie.title,
+                overview: movie.overview,
+                poster_path: movie.poster_path,
+                genres: movie.genre_ids.map((id: number) => Api.getGenre(id)),
+                vote_average: movie.vote_average,
+                type: movie.media_type
+            }
+        });
+
+        return response;   
     }
 }
