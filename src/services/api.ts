@@ -14,7 +14,7 @@ export default class Api {
         return genre ? genre.name : "";
     }
 
-    public static async getMovies(uri: string, page: number, allMovies?: boolean): Promise<MovieOrTvData[]> {
+    public static async getMovies(uri: string, page: number, allMovies?: boolean,): Promise<MovieOrTvData[]> {
         const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}&sort_by=popularity.desc`;
         const request = await axios.get(url);
 
@@ -56,7 +56,7 @@ export default class Api {
         return response;
     }
 
-    public static async getTvShows(uri: string, page: number, allMovies?: boolean): Promise<MovieOrTvData[]> {
+    public static async getTvShows(uri: string, page: number, allShows?: boolean): Promise<MovieOrTvData[]> {
         const url = `${BASE_URL}${uri}?api_key=${API_KEY}&language=pt-BR&page=${page}&sort_by=popularity.desc`;
         const request = await axios.get(url);
 
@@ -74,7 +74,7 @@ export default class Api {
             }
         });
 
-        if (allMovies) {
+        if (allShows) {
             return response;
         } else {
             return response.filter((movie: MovieOrTvData, index: number) => {
@@ -104,11 +104,13 @@ export default class Api {
     public static async getSearch(query: string, page: number): Promise<MovieOrTvData[]> {
         const url = `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${query}&page=${page}`;
         const request = await axios.get(url);
+        const requestFiltered = request.data.results.filter((movie: any) => movie.media_type === "movie" || movie.media_type === "tv");
 
-        const response: MovieOrTvData[] = request.data.results.map((movie: any) => {
+        const response: MovieOrTvData[] = requestFiltered.map((movie: any) => {
+
             return {
                 id: movie.id,
-                title: movie.title,
+                title: movie.title || movie.name,
                 overview: movie.overview,
                 poster_path: movie.poster_path,
                 genres: movie.genre_ids.map((id: number) => Api.getGenre(id)),
@@ -116,7 +118,7 @@ export default class Api {
                 type: movie.media_type
             }
         });
-
+        
         return response;   
     }
 }

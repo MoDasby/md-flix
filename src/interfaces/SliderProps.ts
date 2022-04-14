@@ -2,8 +2,7 @@ import { MovieOrTvData } from "./MovieOrTvData";
 
 interface SliderProps {
     sliderName: string,
-    data: MovieOrTvData[],
-    uriToRedirect?: string,
+    data: MovieOrTvData[]
 }
 
 export default SliderProps;

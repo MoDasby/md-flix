@@ -23,7 +23,7 @@ import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
+const Slider = ({ sliderName, data }: SliderProps) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMovie, setSelectedMovie] = useState<
@@ -57,18 +57,6 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
             {sliderName}
           </Text>
 
-          {
-            uriToRedirect && (
-              <Button
-                as="a"
-                href={uriToRedirect}
-                variant='outline'
-                size="sm"
-              >
-                Ver todos
-              </Button>
-            )
-          }
         </Flex>
 
         <Grid
@@ -139,7 +127,7 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
                     overflow="hidden"
                     w="100%"
                   >
-                    {movie.genres[0]}
+                    {movie.genres.filter(g => g != "")[0]}
                   </Text>
 
                   <HStack>
@@ -151,7 +139,7 @@ const Slider = ({ sliderName, data, uriToRedirect }: SliderProps) => {
                       overflow="hidden"
                       w="100%"
                     >
-                      {movie.vote_average}
+                      {`${movie.vote_average}`}
                     </Text>
                   </HStack>
                 </Flex>

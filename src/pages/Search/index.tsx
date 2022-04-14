@@ -50,12 +50,10 @@ const SearchPage = () => {
 
       {
         search.length > 0 && (
-          console.log(isLoading),
           isLoading === true ? (
             <SliderSkeleton />
           ) : (
-            <Slider sliderName="Resultados" data={data} />
-
+            <Slider sliderName={`Resultados para ${search}`} data={data} />
           )
         )
       }

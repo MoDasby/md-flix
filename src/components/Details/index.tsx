@@ -17,7 +17,6 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
       columns={{ base: 1, lg: 2 }}
       spacing={8}
       marginLeft={{ base: "15vw", md: "20vw", lg: "15vw" }}
-      p={1}
       placeItems={{ base: "center", lg: "start" }}
     >
       <Image

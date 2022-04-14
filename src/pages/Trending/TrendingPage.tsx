@@ -6,7 +6,7 @@ import SidebarItems from "../../enums/SidebarItems";
 import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
-interface IHomePage {
+interface ITrendingPage {
   moviesTrending: MovieOrTvData[],
   topRatedMovies: MovieOrTvData[],
   popularMovies: MovieOrTvData[],
@@ -15,9 +15,9 @@ interface IHomePage {
   popularTv: MovieOrTvData[],
 }
 
-const HomePage = () => {
+const TrendingPage = () => {
 
-  const [data, setData] = useState<IHomePage>({
+  const [data, setData] = useState<ITrendingPage>({
     moviesTrending: [],
     topRatedMovies: [],
     popularMovies: [],
@@ -58,51 +58,45 @@ const HomePage = () => {
 
   return (
     <>
-      <Sidebar active={SidebarItems.Home} />
+      <Sidebar active={SidebarItems.Trending} />
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Filmes em alta"
             data={data.moviesTrending}
-            uriToRedirect="/all/movie"
           />}
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Séries em alta"
             data={data.TvTrending}
-            uriToRedirect="/all/tv"
           />}
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Filmes Bem Avaliados"
             data={data.topRatedMovies}
-            uriToRedirect="/all/movie"
           />}
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Séries Bem Avaliadas"
             data={data.topRatedTv}
-            uriToRedirect="/all/tv"
           />}
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Filmes Populares"
             data={data.popularMovies}
-            uriToRedirect="/all/movie"
           />}
       {
         isLoading ? <SliderSkeleton /> :
           <Slider
             sliderName="Séries Populares"
             data={data.popularTv}
-            uriToRedirect="/all/tv"
           />}
     </>
   )
 }
 
-export default HomePage;
+export default TrendingPage;
