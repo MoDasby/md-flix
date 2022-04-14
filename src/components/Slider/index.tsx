@@ -127,7 +127,7 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                     overflow="hidden"
                     w="100%"
                   >
-                    {movie.genres.filter(g => g != "")[0]}
+                    {movie.genres.filter(g => g !== "")[0]}
                   </Text>
 
                   <HStack>

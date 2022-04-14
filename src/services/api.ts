@@ -1,7 +1,7 @@
 import axios from "axios";
 import genres from "../utils/genres";
 import { MovieOrTvData } from "../interfaces/MovieOrTvData";
-import { config } from "dotenv";
+require('dotenv').config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3"

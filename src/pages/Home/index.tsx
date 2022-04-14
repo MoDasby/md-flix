@@ -8,7 +8,6 @@ import Sidebar from "../../components/Sidebar";
 import SidebarItems from "../../enums/SidebarItems";
 
 const HomePage = () => {
-  const { type = "movie" } = useParams();
   const [data, setData] = useState<{
     movies: MovieOrTvData[];
     tv: MovieOrTvData[];

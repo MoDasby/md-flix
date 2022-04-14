@@ -54,7 +54,7 @@ const TrendingPage = () => {
     if (isLoading) {
       getData();
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   return (
     <>
