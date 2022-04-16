@@ -14,10 +14,13 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Icon,
+  IconButton
 } from '@chakra-ui/react';
 import {
-  FiBarChart2
+  FiBarChart2,
+  FiHeart,
 } from 'react-icons/fi'
 import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
@@ -92,8 +95,8 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
                 objectFit="cover"
-                borderRadius="20px" />
-
+                borderRadius="20px"
+              />
               <Flex
                 bottom="0"
                 left="0"
@@ -168,7 +171,6 @@ const Slider = ({ sliderName, data }: SliderProps) => {
               align="center"
               justify="space-around"
             >
-
               <Text
                 fontSize={{ base: "1.5rem", md: "2rem", lg: "2rem" }}
                 fontWeight="bold"
@@ -184,7 +186,6 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                 borderRadius="20px"
                 h="200px"
               />
-
               <Text
                 fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
                 fontWeight="bold"

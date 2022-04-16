@@ -8,6 +8,7 @@ import Sidebar from "../../components/Sidebar";
 import SidebarItems from "../../enums/SidebarItems";
 
 const HomePage = () => {
+  document.title = "Pagina Inicial - Md-Flix";
   const [data, setData] = useState<{
     movies: MovieOrTvData[];
     tv: MovieOrTvData[];

@@ -16,7 +16,7 @@ interface ITrendingPage {
 }
 
 const TrendingPage = () => {
-
+  document.title = "Em alta - Md-Flix";
   const [data, setData] = useState<ITrendingPage>({
     moviesTrending: [],
     topRatedMovies: [],

@@ -7,7 +7,7 @@ import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
 const ExplorePage = () => {
-
+  document.title = "Explorar - Md-Flix";
   const [data, setData] = useState<
     {
       movies: MovieOrTvData[];

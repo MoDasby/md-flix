@@ -8,6 +8,7 @@ import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
 const SearchPage = () => {
+  document.title = "Pesquisar - Md-Flix";
   const [data, setData] = useState<MovieOrTvData[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean | undefined>(undefined);
@@ -19,6 +20,7 @@ const SearchPage = () => {
       const response = await Api.getSearch(search, 1);
       setIsLoading(false);
       setData(response);
+      document.title = `Resultados para ${search} - Md-Flix`;
     }
 
     if (search.length > 0) {
