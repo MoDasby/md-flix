@@ -23,7 +23,6 @@ const Button: ComponentStyleConfig = {
 
 const theme = extendTheme({
     initialColorMode: 'dark',
-    useSystemColorMode: true,
     components: {
         Button,
     }

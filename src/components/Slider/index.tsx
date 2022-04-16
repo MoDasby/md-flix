@@ -15,16 +15,14 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Icon,
-  IconButton
 } from '@chakra-ui/react';
 import {
   FiBarChart2,
-  FiHeart,
 } from 'react-icons/fi'
 import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FavoriteButton from '../FavoriteButton';
 
 const Slider = ({ sliderName, data }: SliderProps) => {
 
@@ -186,6 +184,11 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                 borderRadius="20px"
                 h="200px"
               />
+
+              <FavoriteButton
+                showId={`${selectedMovie?.id}`}
+              />
+
               <Text
                 fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
                 fontWeight="bold"

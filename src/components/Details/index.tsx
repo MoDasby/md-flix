@@ -9,6 +9,7 @@ import {
   FiBarChart2
 } from 'react-icons/fi';
 import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
+import FavoriteButton from '../FavoriteButton';
 
 const Details = ({ data }: { data: MovieOrTvData }) => {
 
@@ -39,6 +40,9 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
           {data.title}
         </Text>
         <HStack spacing={8}>
+          <FavoriteButton 
+            showId={data.id.toString()}
+          />
           {
             data.type === "tv" &&
             <Text

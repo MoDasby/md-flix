@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import SliderSkeleton from "../../components/SliderSkeleton";
 import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
@@ -8,7 +7,6 @@ import Sidebar from "../../components/Sidebar";
 import SidebarItems from "../../enums/SidebarItems";
 
 const HomePage = () => {
-  document.title = "Pagina Inicial - Md-Flix";
   const [data, setData] = useState<{
     movies: MovieOrTvData[];
     tv: MovieOrTvData[];
@@ -18,12 +16,12 @@ const HomePage = () => {
       tv: [],
     }
   );
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      const movies = await Api.getMovies("/trending/movie/day", 1, true);
-      const tvShows = await Api.getTvShows("/trending/tv/day", 1, true);
+      const movies = await Api.getMovies("/trending/movie/week", 1, true);
+      const tvShows = await Api.getTvShows("/trending/tv/week", 1, true);
 
       setData({
         movies,
@@ -31,14 +29,16 @@ const HomePage = () => {
       });
     }
 
-    getData();
-    setLoading(false);
-  }, [data]);
+    if (isLoading) {
+      getData();
+      setIsLoading(false);
+    }
+  }, [data, isLoading]);
 
   return (
     <>
       <Sidebar active={SidebarItems.Home} />
-      {loading ? (
+      {isLoading ? (
         <SliderSkeleton />
       ) : (
         <Slider
@@ -47,7 +47,7 @@ const HomePage = () => {
         />
       )}
 
-      {loading ? (
+      {isLoading ? (
         <SliderSkeleton />
       ) : (
         <Slider
