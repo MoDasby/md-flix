@@ -102,7 +102,7 @@ export default class Api {
     }
 
     public static async getSearch(query: string, page: number): Promise<MovieOrTvData[]> {
-        const url = `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${query}&page=${page}`;
+        const url = `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${query}&page=${page}&language=pt-BR`;
         const request = await axios.get(url);
         const requestFiltered = request.data.results.filter((movie: any) => movie.media_type === "movie" || movie.media_type === "tv");
 
