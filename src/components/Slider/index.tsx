@@ -17,12 +17,13 @@ import {
   ModalFooter,
 } from '@chakra-ui/react';
 import {
-  FiBarChart2,
-} from 'react-icons/fi'
+  FiBarChart2
+} from 'react-icons/fi';
 import SliderProps from "../../interfaces/SliderProps";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../FavoriteButton';
+import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
 
 const Slider = ({ sliderName, data }: SliderProps) => {
 
@@ -65,88 +66,89 @@ const Slider = ({ sliderName, data }: SliderProps) => {
           gap="6"
           p="5"
         >
-          {data.map((movie, index) => (
-            <Box
-              key={index}
-              as='a'
-              cursor="pointer"
-              position="relative"
-              transition="all .3s ease-in-out"
-              w={{ base: '150px' }}
-              onClick={() => {
-                setSelectedMovie(
-                  {
-                    id: movie.id,
-                    title: movie.title,
-                    overview: movie.overview,
-                    poster_path: movie.poster_path,
-                    type: movie.type === 'movie' ? 'movie' : 'tv',
-                  }
-                );
-                onOpen();
-              }}
-              _hover={{
-                transform: "scale(1.05)",
-              }}
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                objectFit="cover"
-                borderRadius="20px"
-              />
-              <Flex
-                bottom="0"
-                left="0"
-                right="0"
-                p="5"
-                align="center"
-                direction="column"
-                w="100%"
-                h="50%"
-                borderRadius="20px"
-                fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
+          {
+            data.map((item: MovieOrTvData) => (
+              <Box
+                key={item.id}
+                as='a'
+                cursor="pointer"
+                position="relative"
+                transition="all .3s ease-in-out"
+                w={{ base: '150px' }}
+                onClick={() => {
+                  setSelectedMovie(
+                    {
+                      id: item.id,
+                      title: item.title,
+                      overview: item.overview,
+                      poster_path: item.poster_path,
+                      type: item.type === 'movie' ? 'movie' : 'tv',
+                    }
+                  );
+                }}
+                _hover={{
+                  transform: "scale(1.05)",
+                }}
               >
-                <Text
-                  fontWeight="bold"
-                  fontFamily="Roboto"
-                  letterSpacing=".5px"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                  w="100%"
-                >
-                  {movie.title}
-                </Text>
-
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  alt={item.title}
+                  objectFit="cover"
+                  borderRadius="20px"
+                  onClick={onOpen}
+                />
                 <Flex
-                  justify="space-between"
+                  bottom="0"
+                  left="0"
+                  right="0"
+                  p="5"
                   align="center"
+                  direction="column"
                   w="100%"
+                  h="50%"
+                  borderRadius="20px"
+                  fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
                 >
+                  <Text
+                    fontWeight="bold"
+                    fontFamily="Roboto"
+                    letterSpacing=".5px"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                    w="100%"
+                  >
+                    {item.title}
+                  </Text>
                   <Text
                     textOverflow="ellipsis"
                     overflow="hidden"
                     w="100%"
                   >
-                    {movie.genres.filter(g => g !== "")[0]}
+                    {item.genres.filter(g => g !== "")[0]}
                   </Text>
-
-                  <HStack>
-                    <FiBarChart2
-                      size="25px"
-                    />
-                    <Text
-                      textOverflow="ellipsis"
-                      overflow="hidden"
-                      w="100%"
-                    >
-                      {`${movie.vote_average}`}
-                    </Text>
-                  </HStack>
+                  <Flex
+                    justify="space-between"
+                    align="center"
+                    w="100%"
+                  >
+                    <HStack>
+                      <FiBarChart2
+                        size="25px"
+                      />
+                      <Text
+                        textOverflow="ellipsis"
+                        overflow="hidden"
+                        w="100%"
+                      >
+                        {`${item.vote_average}`}
+                      </Text>
+                    </HStack>
+                    <FavoriteButton showId={item.id.toString()} showType={item.type || ""} />
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
-          ))}
+              </Box>
+            ))
+          }
         </Grid>
       </Box>
 
@@ -186,7 +188,8 @@ const Slider = ({ sliderName, data }: SliderProps) => {
               />
 
               <FavoriteButton
-                showId={`${selectedMovie?.id}`}
+                showId={`${selectedMovie?.id || ''}`}
+                showType={`${selectedMovie?.type || ''}`}
               />
 
               <Text

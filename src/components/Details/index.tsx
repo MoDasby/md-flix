@@ -42,6 +42,7 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
         <HStack spacing={8}>
           <FavoriteButton 
             showId={data.id.toString()}
+            showType={`${data.type}`}
           />
           {
             data.type === "tv" &&

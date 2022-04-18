@@ -17,7 +17,8 @@ import {
   FiCompass,
   FiSun,
   FiMoon,
-  FiSearch
+  FiSearch,
+  FiHeart
 } from 'react-icons/fi';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -115,6 +116,16 @@ const Sidebar = ({ active }: { active: SidebarItems }) => {
             active={activeKey === SidebarItems.Explore}
             onClick={() => {
               setActiveKey(SidebarItems.Explore);
+            }}
+          />
+
+          <SidebarItem
+            redirect='/favorites'
+            icon={FiHeart}
+            text="Favoritos"
+            active={activeKey === SidebarItems.Favorites}
+            onClick={() => {
+              setActiveKey(SidebarItems.Favorites);
             }}
           />
         </Box>

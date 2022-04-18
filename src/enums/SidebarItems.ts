@@ -3,6 +3,7 @@ enum SidebarItems {
     Trending = "trending",
     Explore = "explore",
     Search = "search",
+    Favorites = "favorites",
     None = "none"
 }
 

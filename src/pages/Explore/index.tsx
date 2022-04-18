@@ -33,8 +33,10 @@ const ExplorePage = () => {
       });
     }
 
-    getData();
-  }, [data]);
+    if (isLoading) {
+      getData();
+    }
+  }, [data, isLoading]);
 
   return (
     <>

@@ -27,11 +27,12 @@ const HomePage = () => {
         movies,
         tv: tvShows,
       });
+
+      setIsLoading(false);
     }
 
     if (isLoading) {
       getData();
-      setIsLoading(false);
     }
   }, [data, isLoading]);
 
