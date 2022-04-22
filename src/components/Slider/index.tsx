@@ -187,11 +187,6 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                 h="200px"
               />
 
-              <FavoriteButton
-                showId={`${selectedMovie?.id || ''}`}
-                showType={`${selectedMovie?.type || ''}`}
-              />
-
               <Text
                 fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
                 fontWeight="bold"

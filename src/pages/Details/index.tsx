@@ -16,7 +16,8 @@ const DetailsPage = () => {
     poster_path: '',
     backdrop_path: '',
     genres: [],
-    vote_average: 0
+    vote_average: 0,
+    release_year: '',
   });
   const [isLoading, setIsLoading] = useState(true);
 

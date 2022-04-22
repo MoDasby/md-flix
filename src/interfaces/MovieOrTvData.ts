@@ -7,5 +7,6 @@ export interface MovieOrTvData {
     number_of_seasons?: number,
     poster_path: string,
     backdrop_path: string,
+    release_year: string,
     type?: string
 }

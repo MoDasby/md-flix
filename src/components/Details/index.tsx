@@ -37,7 +37,7 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
           fontSize={{ base: "2rem", md: "3rem" }}
           fontWeight="bold"
         >
-          {data.title}
+          {`${data.title} (${data.release_year})`}
         </Text>
         <HStack spacing={8}>
           <FavoriteButton 
@@ -70,7 +70,6 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
         </HStack>
         <Text
           fontSize="md"
-          fontWeight="bold"
         >
           {data.overview}
         </Text>

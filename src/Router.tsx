@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 import DetailsPage from "./pages/Details";
 import SearchPage from "./pages/Search";
-import TrendingPage from "./pages/Trending/TrendingPage";
+import TrendingPage from "./pages/Trending";
 import ExplorePage from "./pages/Explore";
 import FavoritePage from "./pages/Favorite";
 
