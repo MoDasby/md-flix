@@ -189,7 +189,6 @@ const Slider = ({ sliderName, data }: SliderProps) => {
 
               <Text
                 fontSize={{ base: ".8rem", md: "1rem", lg: "1rem" }}
-                fontWeight="bold"
                 letterSpacing=".5px"
                 textOverflow="ellipsis"
                 overflow="hidden"
