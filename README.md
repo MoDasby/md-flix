@@ -23,7 +23,7 @@ Agora entre na pasta do projeto:
 cd md-flix
 ```
 
-Crie um arquivo chamado .env e adicione o seguinte texto nele:
+Crie um arquivo chamado .env e adicione a seguinte variável nele:
 
 ```
 REACT_APP_API_KEY=<<sua api key>>
