@@ -36,8 +36,9 @@ const DetailsPage = () => {
 
     if (isLoading) {
       getData();
-      document.title = `${data.title} - Md-Flix`;
     }
+
+    document.title = `${data.title} - Md-Flix`;
   }, [data, id, isLoading, type]);
 
 

@@ -7,6 +7,8 @@ import { MovieOrTvData } from "../../interfaces/MovieOrTvData";
 import Api from "../../services/api";
 
 const FavoritePage = () => {
+  document.title = "Seus Favoritos"
+
   const [data, setData] = useState<MovieOrTvData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
