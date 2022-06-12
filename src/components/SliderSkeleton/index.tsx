@@ -12,7 +12,7 @@ const SliderSkeleton = () => {
 
     <Box
       paddingTop="2rem"
-      paddingLeft={{ base: "15vw", md: "25vw", lg: "18vw" }}
+      paddingLeft={{ base: "0", md: "25vw", lg: "18vw" }}
     >
       <HStack
         spacing={5}

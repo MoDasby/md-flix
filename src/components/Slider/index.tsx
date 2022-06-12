@@ -2,41 +2,20 @@ import '@fontsource/roboto';
 import {
   Box,
   Flex,
-  Button,
   Grid,
   Text,
   Image,
   HStack,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
 } from '@chakra-ui/react';
 import {
   FiBarChart2
 } from 'react-icons/fi';
 import SliderProps from "../../interfaces/SliderProps";
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../FavoriteButton';
 import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
 
 const Slider = ({ sliderName, data }: SliderProps) => {
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedMovie, setSelectedMovie] = useState<
-    {
-      id: number
-      title: string,
-      overview: string,
-      poster_path: string,
-      type: string,
-    }
-  >();
 
   return (
     <>
@@ -44,7 +23,7 @@ const Slider = ({ sliderName, data }: SliderProps) => {
         as='section'
         w="100%"
         paddingTop="2rem"
-        paddingLeft={{ base: "15vw", md: "20vw", lg: "15vw" }}
+        paddingLeft={{ base: "0", md: "20vw", lg: "15vw" }}
       >
         <Flex
           as='header'
@@ -75,28 +54,20 @@ const Slider = ({ sliderName, data }: SliderProps) => {
                 position="relative"
                 transition="all .3s ease-in-out"
                 w={{ base: '150px' }}
-                onClick={() => {
-                  setSelectedMovie(
-                    {
-                      id: item.id,
-                      title: item.title,
-                      overview: item.overview,
-                      poster_path: item.poster_path,
-                      type: item.type === 'movie' ? 'movie' : 'tv',
-                    }
-                  );
-                }}
                 _hover={{
                   transform: "scale(1.05)",
                 }}
               >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                  alt={item.title}
-                  objectFit="cover"
-                  borderRadius="20px"
-                  onClick={onOpen}
-                />
+                <Link
+                  to={item.type === 'movie' ? `/details/movie/${item.id}` : `/details/tv/${item.id}`}
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                    alt={item.title}
+                    objectFit="cover"
+                    borderRadius="20px"
+                  />
+                </Link>
                 <Flex
                   bottom="0"
                   left="0"
@@ -152,7 +123,7 @@ const Slider = ({ sliderName, data }: SliderProps) => {
         </Grid>
       </Box>
 
-      <Modal
+      {/* <Modal
         isOpen={isOpen}
         onClose={onClose}
         motionPreset="slideInBottom"
@@ -212,7 +183,7 @@ const Slider = ({ sliderName, data }: SliderProps) => {
             </Link>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   )
 }

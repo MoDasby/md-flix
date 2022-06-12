@@ -3,13 +3,19 @@ import '@fontsource/rubik';
 import {
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
   Heading,
   Icon,
+  ModalCloseButton,
   Stack,
   Text,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
+  useDisclosure
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -18,9 +24,10 @@ import {
   FiSun,
   FiMoon,
   FiSearch,
-  FiHeart
+  FiHeart,
+  FiMenu
 } from 'react-icons/fi';
-import { useState } from 'react';
+import React, { MutableRefObject, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SidebarItemProps from '../../interfaces/SidebarItemProps';
 import SidebarItems from '../../enums/SidebarItems';
@@ -29,45 +36,143 @@ import SidebarItems from '../../enums/SidebarItems';
 const Sidebar = ({ active }: { active: SidebarItems }) => {
 
   const [activeKey, setActiveKey] = useState<SidebarItems>(active);
-  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
 
     <>
-      <Button
-        bg="transparent"
-        onClick={toggleColorMode}
-        transition="0.3s"
-        position="absolute"
-        right="0"
-        _focus={{ outline: "none" }}
-        _hover={{ bg: "none" }}
-      >
-        <Icon
-          as={colorMode === "light" ? FiSun : FiMoon}
-          color={useColorModeValue("blackAlpha.800", "white")}
-          fontSize={{ md: "1.5rem" }}
+      <DesktopSidebar>
+        <SidebarItem
+          redirect='/'
+          icon={FiHome}
+          text="Home"
+          active={activeKey === SidebarItems.Home}
+          onClick={() => {
+            setActiveKey(SidebarItems.Home);
+          }}
         />
-      </Button>
 
-      <Stack
-        as="aside"
-        h="100vh"
-        w={{ base: "15vw", md: "20vw", lg: "15vw" }}
-        bg={useColorModeValue("gray.100", "blackAlpha.200")}
-        spacing="2rem"
-        boxShadow="0 5px 15px #0000007f"
-        pos="fixed"
-        top="0"
-        zIndex="1"
+        <SidebarItem
+          redirect='/search'
+          icon={FiSearch}
+          text="Buscar"
+          active={activeKey === SidebarItems.Search}
+          onClick={() => {
+            setActiveKey(SidebarItems.Search);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/trending'
+          icon={FiTrendingUp}
+          text="Em Alta"
+          active={activeKey === SidebarItems.Trending}
+          onClick={() => {
+            setActiveKey(SidebarItems.Trending);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/explore'
+          icon={FiCompass}
+          text="Explorar"
+          active={activeKey === SidebarItems.Explore}
+          onClick={() => {
+            setActiveKey(SidebarItems.Explore);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/favorites'
+          icon={FiHeart}
+          text="Favoritos"
+          active={activeKey === SidebarItems.Favorites}
+          onClick={() => {
+            setActiveKey(SidebarItems.Favorites);
+          }}
+        />
+      </DesktopSidebar>
+
+      <MobileSidebar>
+        <SidebarItem
+          redirect='/'
+          icon={FiHome}
+          text="Home"
+          active={activeKey === SidebarItems.Home}
+          onClick={() => {
+            setActiveKey(SidebarItems.Home);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/search'
+          icon={FiSearch}
+          text="Buscar"
+          active={activeKey === SidebarItems.Search}
+          onClick={() => {
+            setActiveKey(SidebarItems.Search);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/trending'
+          icon={FiTrendingUp}
+          text="Em Alta"
+          active={activeKey === SidebarItems.Trending}
+          onClick={() => {
+            setActiveKey(SidebarItems.Trending);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/explore'
+          icon={FiCompass}
+          text="Explorar"
+          active={activeKey === SidebarItems.Explore}
+          onClick={() => {
+            setActiveKey(SidebarItems.Explore);
+          }}
+        />
+
+        <SidebarItem
+          redirect='/favorites'
+          icon={FiHeart}
+          text="Favoritos"
+          active={activeKey === SidebarItems.Favorites}
+          onClick={() => {
+            setActiveKey(SidebarItems.Favorites);
+          }}
+        />
+      </MobileSidebar>
+    </>
+  )
+}
+
+const DesktopSidebar = ({ children }: { children: React.ReactNode }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  return (
+    <Stack
+      as="aside"
+      h="100vh"
+      w={{ base: "15vw", md: "20vw", lg: "15vw" }}
+      bg={useColorModeValue("gray.100", "blackAlpha.200")}
+      spacing="2rem"
+      boxShadow="0 5px 15px #0000007f"
+      pos="fixed"
+      top="0"
+      zIndex="1"
+      display={{ base: "none", md: "block" }}
+    >
+
+      <Flex
+        as="header"
+        w="100%"
+        justify="space-between"
+        align="center"
+        p="2"
       >
-
-        <Flex
-          as="header"
-          w="100%"
-          justify="space-between"
-          align="center"
-          p="2"
+        <Link
+          to="/"
         >
           <Heading
             as="h1"
@@ -76,61 +181,116 @@ const Sidebar = ({ active }: { active: SidebarItems }) => {
           >
             Md-Flix
           </Heading>
-        </Flex>
+        </Link>
 
-        <Box>
-          <SidebarItem
-            redirect='/'
-            icon={FiHome}
-            text="Home"
-            active={activeKey === SidebarItems.Home}
-            onClick={() => {
-              setActiveKey(SidebarItems.Home);
-            }}
+        <Button
+          p="1rem"
+          bg="transparent"
+          onClick={toggleColorMode}
+          transition="0.3s"
+          _focus={{ outline: "none" }}
+          _hover={{ bg: "none" }}
+        >
+          <Icon
+            as={colorMode === "light" ? FiSun : FiMoon}
+            color={useColorModeValue("blackAlpha.800", "white")}
+            fontSize={{ md: "1.5rem" }}
           />
+        </Button>
+      </Flex>
 
-          <SidebarItem
-            redirect='/search'
-            icon={FiSearch}
-            text="Buscar"
-            active={activeKey === SidebarItems.Search}
-            onClick={() => {
-              setActiveKey(SidebarItems.Search);
-            }}
-          />
+      <Box>
+        {children}
+      </Box>
+    </Stack>
+  )
+}
 
-          <SidebarItem
-            redirect='/trending'
-            icon={FiTrendingUp}
-            text="Em Alta"
-            active={activeKey === SidebarItems.Trending}
-            onClick={() => {
-              setActiveKey(SidebarItems.Trending);
-            }}
-          />
+const MobileSidebar = ({ children }: { children: React.ReactNode }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const boxRef = React.useRef() as MutableRefObject<HTMLDivElement>;
 
-          <SidebarItem
-            redirect='/explore'
-            icon={FiCompass}
-            text="Explorar"
-            active={activeKey === SidebarItems.Explore}
-            onClick={() => {
-              setActiveKey(SidebarItems.Explore);
-            }}
-          />
 
-          <SidebarItem
-            redirect='/favorites'
-            icon={FiHeart}
-            text="Favoritos"
-            active={activeKey === SidebarItems.Favorites}
-            onClick={() => {
-              setActiveKey(SidebarItems.Favorites);
-            }}
-          />
-        </Box>
-      </Stack>
-    </>
+  document.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      boxRef.current.style.backgroundColor = '#0000007f';
+    } else {
+      boxRef.current.style.backgroundColor = 'transparent';
+    }
+  });
+
+  return (
+    <Box
+      position="sticky"
+      top="0"
+      zIndex="1"
+      w="100vw"
+      h="10vh"
+      display={{ base: "flex", md: "none" }}
+      alignItems="center"
+      justifyContent="space-around"
+      ref={boxRef}
+    >
+      <Link
+        to="/"
+      >
+        <Heading
+          as="h1"
+          fontSize={{ base: "1.5rem", md: "2rem" }}
+          fontFamily="Rubik"
+        >
+          Md-Flix
+        </Heading>
+      </Link>
+
+      <Button
+        variant={"transparent"}
+        onClick={onOpen}
+      >
+        <FiMenu
+          size="30px"
+        />
+      </Button>
+
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <Flex
+            as="header"
+            w="100%"
+            justify="space-between"
+            align="center"
+            p="2"
+          >
+            <ModalCloseButton />
+
+            <Button
+              p="1rem"
+              bg="transparent"
+              onClick={toggleColorMode}
+              transition="0.3s"
+              _focus={{ outline: "none" }}
+              _hover={{ bg: "none" }}
+            >
+              <Icon
+                as={colorMode === "light" ? FiSun : FiMoon}
+                color={useColorModeValue("blackAlpha.800", "white")}
+                fontSize={{ md: "1.5rem" }}
+              />
+            </Button>
+          </Flex>
+
+          <DrawerBody>
+            {children}
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </Box>
   )
 }
 
@@ -156,7 +316,6 @@ const SidebarItem = ({ icon, text, active, redirect, onClick }: SidebarItemProps
         />
         <Text
           {...(active ? {} : { color: "gray.600" })}
-          display={{ base: "none", md: "block" }}
           letterSpacing=".2rem"
         >
           {text}

@@ -11,7 +11,7 @@ const DetailsSkeleton = () => {
     <SimpleGrid
       columns={{ base: 1, lg: 2 }}
       spacing={8}
-      marginLeft={{ base: "15vw", md: "20vw", lg: "15vw" }}
+      marginLeft={{ base: "0", md: "20vw", lg: "15vw" }}
       p={1}
       placeItems="center"
     >

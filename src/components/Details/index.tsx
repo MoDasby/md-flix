@@ -12,13 +12,13 @@ import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
 import FavoriteButton from '../FavoriteButton';
 
 const Details = ({ data }: { data: MovieOrTvData }) => {
-
   return (
     <SimpleGrid
       columns={{ base: 1, lg: 2 }}
       spacing={8}
-      marginLeft={{ base: "15vw", md: "20vw", lg: "15vw" }}
+      marginLeft={{ base: "0", md: "20vw", lg: "15vw" }}
       placeItems={{ base: "center", lg: "start" }}
+      overflow="hidden"
     >
       <Image
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}

@@ -22,7 +22,9 @@ const Button: ComponentStyleConfig = {
 }
 
 const theme = extendTheme({
-    initialColorMode: 'dark',
+    config: {
+        initialColorMode: 'dark',
+    },
     components: {
         Button,
     }
