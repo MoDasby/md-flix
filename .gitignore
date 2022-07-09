@@ -27,3 +27,6 @@ moviesToTest.ts
 
 # idea
 .idea
+*.iws
+*.iml
+*.ipr
