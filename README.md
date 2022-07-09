@@ -1,7 +1,8 @@
 # Md-Flix
 
 <img src="./.github/app-screenshot-2.png" width="400px" >
-<img src="./.github/app-screenshot.png" width="400px" 
+<br>
+<img src="./.github/app-screenshot.png" width="400px" >
 
 <br>
 
