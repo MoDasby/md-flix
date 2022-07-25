@@ -6,7 +6,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import {
-  FiBarChart2
+  FiBarChart2,
+  FiFilm
 } from 'react-icons/fi';
 import { MovieOrTvData } from '../../interfaces/MovieOrTvData';
 import FavoriteButton from '../FavoriteButton';
@@ -40,7 +41,7 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
           {`${data.title} (${data.release_year})`}
         </Text>
         <HStack spacing={8}>
-          <FavoriteButton 
+          <FavoriteButton
             showId={data.id.toString()}
             showType={`${data.type}`}
           />
@@ -62,11 +63,16 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
               {data.vote_average}
             </Text>
           </HStack>
-          <Text
-            fontSize="md"
-          >
-            {data.genres.join(', ')}
-          </Text>
+          <HStack>
+            <FiFilm 
+              size="20px"
+            />
+            <Text
+              fontSize="md"
+            >
+              {data.genres.join(', ')}
+            </Text>
+          </HStack>
         </HStack>
         <Text
           fontSize="md"

@@ -18,7 +18,7 @@ export default class Api {
     }
 
     private static formatVoteAverage(voteAverage: number) {
-        return Number.parseFloat(voteAverage.toFixed(2));
+        return Number.parseFloat(voteAverage.toFixed(1));
     }
 
     public static async getMovies(uri: string, page: number, allMovies?: boolean,): Promise<MovieOrTvData[]> {
@@ -109,12 +109,12 @@ export default class Api {
         };
     }
 
-    public static async getSearch(query: string, page: number): Promise<MovieOrTvData[]> {
+    public static async getSearch(query: string, page: number, filter?: string): Promise<MovieOrTvData[]> {
         const url = `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${query}&page=${page}&language=pt-BR`;
         const request = await axios.get(url);
         const requestFiltered = request.data.results.filter((movie: any) => movie.media_type === "movie" || movie.media_type === "tv");
 
-        return requestFiltered.map((movie: any) => {
+        const response: MovieOrTvData[] = requestFiltered.map((movie: any) => {
             return {
                 id: movie.id,
                 title: movie.title || movie.name,
@@ -125,5 +125,8 @@ export default class Api {
                 type: movie.media_type
             }
         });
+
+        if (filter) return response.filter(show => show.genres.includes(filter));
+        else return response;
     }
 }
