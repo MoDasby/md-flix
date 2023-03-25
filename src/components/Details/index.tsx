@@ -33,14 +33,26 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
       <VStack
         spacing={8}
         p={8}
+        w="100%"
       >
         <Text
           fontSize={{ base: "2rem", md: "3rem" }}
           fontWeight="bold"
+          w="100%"
         >
           {`${data.title} (${data.release_year})`}
         </Text>
-        <HStack spacing={8}>
+        <HStack spacing={8} w="100%">
+          <HStack>
+            <FiBarChart2
+              size="20px"
+            />
+            <Text
+              fontSize="md"
+            >
+              {data.vote_average}
+            </Text>
+          </HStack>
           <FavoriteButton
             showId={data.id.toString()}
             showType={`${data.type}`}
@@ -53,18 +65,10 @@ const Details = ({ data }: { data: MovieOrTvData }) => {
               {`${data.number_of_seasons} Temporadas`}
             </Text>
           }
+        </HStack>
+        <HStack w="100%">
           <HStack>
-            <FiBarChart2
-              size="20px"
-            />
-            <Text
-              fontSize="md"
-            >
-              {data.vote_average}
-            </Text>
-          </HStack>
-          <HStack>
-            <FiFilm 
+            <FiFilm
               size="20px"
             />
             <Text
