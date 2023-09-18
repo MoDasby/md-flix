@@ -6,7 +6,7 @@ Projeto que consome a api do TMDB (themoviedatabase)
 
 - Ver os filmes do momento, assim como filmes com avaliações altas
 - Ver sinopse dos filmes
-- Pesquisar filmes filtrando por genêro
+- Pesquisar filmes filtrando por gênero
 - Adicionar filmes aos favoritos para ver depois
 
 ## Imagens
