@@ -1,5 +1,15 @@
 # Md-Flix
 
+Projeto que consome a api do TMDB (themoviedatabase)
+
+## Funcionalidades
+
+- Ver os filmes do momento, assim como filmes com avaliações altas
+- Ver sinopse dos filmes
+- Pesquisar filmes filtrando por genêro
+- Adicionar filmes aos favoritos para ver depois
+
+## Imagens
 <img src="./.github/app-screenshot-2.png" width="400px" >
 <br>
 <img src="./.github/app-screenshot.png" width="400px" >
